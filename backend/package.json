@@ -1,0 +1,19 @@
+{
+  "name": "groupomania-rs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melan04/MelanyConde_7_14052021.git"
+  },
+  "author": "Mélany Condé",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melan04/MelanyConde_7_14052021/issues"
+  },
+  "homepage": "https://github.com/melan04/MelanyConde_7_14052021#readme"
+}
