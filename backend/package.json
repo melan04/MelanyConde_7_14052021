@@ -1,19 +1,12 @@
 {
-  "name": "groupomania-rs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/melan04/MelanyConde_7_14052021.git"
-  },
-  "author": "Mélany Condé",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/melan04/MelanyConde_7_14052021/issues"
-  },
-  "homepage": "https://github.com/melan04/MelanyConde_7_14052021#readme"
+  "dependencies": {
+    "async": "^3.2.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
+  }
 }
