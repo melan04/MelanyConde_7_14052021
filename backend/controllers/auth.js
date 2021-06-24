@@ -87,7 +87,9 @@ exports.login = (req, res, next) => {
                     },
                     'bWFzdXBlcmNsZXNlY3JldGVwb3VydG9rZW5tYWdpcXVlcXVlcGVyc29ubmVpbHBldXRsYWRldmluZXI=',
                     { expiresIn: '1h' }
+                     
                 )
+               
             });
         })
         .catch(error => res.status(500).json({ error }));

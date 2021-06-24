@@ -5,7 +5,6 @@ const path = require('path');
 const auth = require('./middleware/auth');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const cors = require ('cors')
 
 // import des routes
 const authRoutes = require('./routes/auth');
@@ -39,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 
 const limiter = rateLimit({
-    max: 2,
+    max: 100,
     windowMs: 1 * 60 * 1000,
     message: ({error: 'Trop de tentatives de connexion. Retentez dans 5 minutes'}),
 });

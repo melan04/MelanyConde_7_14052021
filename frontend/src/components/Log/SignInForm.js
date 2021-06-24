@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
+
 
 const SignInForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
 
     const handleLogin = (e) => {
         e.preventDefault();
-        const loginError = document.querySelector(".login.error");
 
         axios({
             method: "post",
@@ -20,11 +20,12 @@ const SignInForm = () => {
         })
             .then((res) => {
                 window.location = "/";
-                Cookies.set("jwt", res.data.token)
+                sessionStorage.setItem('jwt', res.data.token);
+                sessionStorage.setItem('userID', res.data.userId)
             })
             .catch((err) => {
                 console.log(err.response);
-                loginError.innerHTML = err.response.data.error;
+                setError(err.response.data.error)
             });
     };
 
@@ -49,7 +50,7 @@ const SignInForm = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
             />
-            <div className="login error"></div>
+            <div>{error}</div>
             <br />
             <input type="submit" value="Se connecter" />
         </form>

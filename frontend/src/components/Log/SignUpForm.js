@@ -10,20 +10,14 @@ const SignUpForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [controlPassword, setControlPassword] = useState("");
+    const [error, setError] = useState(null);
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        const registerError = document.querySelector(".register.error");
-        const passwordConfirmError = document.querySelector(
-            ".password-confirm.error"
-        );
 
-        passwordConfirmError.innerHTML = "";
 
-       
-            if (password !== controlPassword) {
-                passwordConfirmError.innerHTML =
-                    "Les mots de passe ne correspondent pas";
+        if (password !== controlPassword) {
+            setError("Les mots de passe ne correspondent pas");
 
         } else {
             await axios({
@@ -42,7 +36,7 @@ const SignUpForm = () => {
                 })
                 .catch((err) => {
                     console.log(err.response);
-                    registerError.innerHTML = err.response.data.error
+                    setError(err.response.data.error)
                 });
         }
     };
@@ -109,8 +103,7 @@ const SignUpForm = () => {
                         onChange={(e) => setControlPassword(e.target.value)}
                         value={controlPassword}
                     />
-                    <div className="password-confirm error"></div>
-                    <div className="register error"></div>
+                    <div>{error}</div>
                     <br />
                     <input type="submit" value="Valider inscription" />
                 </form>
