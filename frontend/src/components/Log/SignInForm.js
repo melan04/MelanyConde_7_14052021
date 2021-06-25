@@ -19,7 +19,7 @@ const SignInForm = () => {
             },
         })
             .then((res) => {
-                window.location = "/";
+                window.location = "/pageprofil";
                 sessionStorage.setItem('jwt', res.data.token);
                 sessionStorage.setItem('userID', res.data.userId)
             })
