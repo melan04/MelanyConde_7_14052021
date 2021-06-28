@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import Routes from "./components/Routes";
 import { UidContext } from "./components/AppContext.js";
 // import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getUser } from "./actions/user.actions";
+
 
 const App = () => {
   const [uid, setUid] = useState(null);
+  const dispatch = useDispatch(); 
+
 
   const readStorage =() => {
     const user = sessionStorage.getItem("userID")
@@ -15,9 +20,11 @@ const App = () => {
   }
 
   React.useEffect(() => {
-    readStorage();
-  }, [uid])
+    readStorage();  
+    if (uid) dispatch(getUser(uid));
+  }, [uid, dispatch]);
 
+  
   return (
     <UidContext.Provider value={uid}>
       <Routes />

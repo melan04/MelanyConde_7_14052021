@@ -47,6 +47,7 @@ const limiter = rateLimit({
 const db = require("./models");
 db.sequelize.sync();
 
+
 // enregistrement des routeurs
 app.use('/api/auth/login', limiter)
 app.use('/images', express.static(path.join(__dirname, 'images')));
