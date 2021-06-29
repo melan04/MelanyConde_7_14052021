@@ -11,7 +11,7 @@ exports.findAllArticles = (req, res, next) => {
 ]})
   .then(articles => {
       console.log(articles);
-      res.status(200).json({data: articles});
+      res.status(200).json(articles);
   })
   .catch(error => res.status(400).json({ error }));
 };
@@ -25,7 +25,7 @@ exports.findArticlesByUserId = (req, res, next) => {
   ]})
   .then(articles => {
       console.log(articles);
-      res.status(200).json({data: articles});
+      res.status(200).json(articles);
   })
   .catch(error => res.status(400).json({ error }));
 };

@@ -7,7 +7,7 @@ const Home = () => {
         <div className="home">
             <LeftNav />
             <div className="main">
-                <Thread />
+                <Thread/> 
             </div>
         </div>
     );

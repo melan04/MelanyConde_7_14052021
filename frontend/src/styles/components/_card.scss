@@ -113,12 +113,13 @@
     }
     p {
       margin: 3px 0 9px;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
 
       @media screen and(max-width: 440px) {
         margin-top: -18px;
       }
     }
+
     .update-post {
       textarea {
         font-size: 1.3rem;
