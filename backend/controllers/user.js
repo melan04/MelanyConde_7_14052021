@@ -12,7 +12,7 @@ exports.findAllUsers = (req, res, next) => {
     User.findAll()
     .then(users => {
         console.log(users);
-        res.status(200).json({data: users});
+        res.status(200).json(users);
     })
     .catch(error => res.status(400).json({ error }));
 };

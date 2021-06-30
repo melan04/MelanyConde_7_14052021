@@ -20,8 +20,8 @@ const SignInForm = () => {
         })
             .then((res) => {
                 window.location = "/profil";
-                sessionStorage.setItem('jwt', res.data.token);
-                sessionStorage.setItem('userID', res.data.userId)
+                localStorage.setItem('jwt', res.data.token);
+                localStorage.setItem('userID', res.data.userId)
             })
             .catch((err) => {
                 console.log(err.response);

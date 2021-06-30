@@ -3,7 +3,7 @@ import axios from "axios";
 //posts
 
 export const GET_POSTS = "GET_POSTS";
-const token = sessionStorage.getItem("jwt")
+const token = localStorage.getItem("jwt")
 
 export const getPosts = () => {
     return (dispatch) => {

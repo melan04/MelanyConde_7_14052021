@@ -12,7 +12,7 @@ const App = () => {
 
 
   const readStorage =() => {
-    const user = sessionStorage.getItem("userID")
+    const user = localStorage.getItem("userID")
     if (user) {
       console.log(user)
       setUid(user)

@@ -6,7 +6,7 @@ export const UPDATE_BIO = "UPDATE_BIO";
 
 export const getUser = (uid) => {
 
-    const token = sessionStorage.getItem("jwt")
+    const token = localStorage.getItem("jwt")
 
     return (dispatch) => {
 
@@ -32,7 +32,7 @@ export const getUser = (uid) => {
 
 export const uploadPicture = (data, id) => {
 
-    const token = sessionStorage.getItem("jwt")
+    const token = localStorage.getItem("jwt")
 
     return (dispatch) => {
 
@@ -64,7 +64,7 @@ export const uploadPicture = (data, id) => {
 
 export const updateBio = (userId, bio) => {
 
-    const token = sessionStorage.getItem("jwt")
+    const token = localStorage.getItem("jwt")
 
     return (dispatch) => {
 
