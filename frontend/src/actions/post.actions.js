@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const GET_POSTS = "GET_POSTS";
 export const UPDATE_POST = "UPDATE_POST";
+export const DELETE_POST = "DELETE_POST";
 
 const token = localStorage.getItem("jwt")
 
@@ -39,3 +40,18 @@ export const updatePost = (articleId, content) => {
             .catch((err) => console.log(err))
     }
 }
+
+export const deletePost = (articleId) => {
+    return (dispatch) => {
+        return axios
+            ({
+                method: "delete",
+                url: `${process.env.REACT_APP_API_URL}api/articles/` + articleId,
+                headers: { 'Authorization': 'Bearer ' + token },
+            })
+            .then((res) => {
+                dispatch({ type: DELETE_POST, payload: {articleId} })
+            })
+            .catch((err) => console.log(err))
+    };
+};

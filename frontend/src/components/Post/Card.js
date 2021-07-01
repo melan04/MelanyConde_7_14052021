@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts, updatePost } from '../../actions/post.actions';
 import { dateParser } from '../Utils';
+import DeleteCard from './DeleteCard';
 // import LikeButton from './LikeButton';
 
 const Card = ({ article }) => {
@@ -70,6 +71,7 @@ const Card = ({ article }) => {
                         <div onClick={() => setIsUpdated(!isUpdated)}>
                             <img src="./img/icons/edit.svg" alt="edit" />
                         </div>
+                        <DeleteCard id= {article.id} />
                     </div>
                 )}
 
