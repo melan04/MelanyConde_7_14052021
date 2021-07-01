@@ -3,6 +3,7 @@ import axios from "axios";
 //posts
 
 export const GET_POSTS = "GET_POSTS";
+export const ADD_POST = "ADD_POST";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
 
@@ -18,8 +19,29 @@ export const getPosts = (num) => {
             })
             .then((res) => {
                 const array = res.data.slice(0, num)
-                console.log(res)
+      
                 dispatch({ type: GET_POSTS, payload: array })
+            })
+            .catch((err) => console.log(err))
+    }
+}
+
+export const addPost = (data) => {
+
+    const token = localStorage.getItem("jwt")
+
+    return (dispatch) => {
+        return axios
+            ({
+                method: "post",
+                url: `${process.env.REACT_APP_API_URL}api/articles`,
+                headers: { 'Authorization': 'Bearer ' + token },
+                data : {data}, 
+            })
+            .then((res) => {
+                console.log(res)
+              
+                dispatch({ type: ADD_POST, payload: data })
             })
             .catch((err) => console.log(err))
     }
@@ -51,6 +73,7 @@ export const deletePost = (articleId) => {
             })
             .then((res) => {
                 dispatch({ type: DELETE_POST, payload: {articleId} })
+                localStorage.clear();
             })
             .catch((err) => console.log(err))
     };

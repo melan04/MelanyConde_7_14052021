@@ -1,4 +1,4 @@
-import { DELETE_POST, GET_POSTS, UPDATE_POST } from "../actions/post.actions";
+import { DELETE_POST, GET_POSTS, UPDATE_POST,ADD_POST } from "../actions/post.actions";
 
 const initialState = {};
 
@@ -7,6 +7,9 @@ export default function postReducer(state = initialState, action) {
         case GET_POSTS:
             return action.payload;
 
+            case ADD_POST:
+                        return action.payload;
+                    
 
         case UPDATE_POST:
             return state.map((article) => {

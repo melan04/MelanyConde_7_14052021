@@ -3,6 +3,8 @@ import axios from "axios";
 export const GET_USER = "GET_USER";
 export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
 export const UPDATE_BIO = "UPDATE_BIO";
+export const DELETE_USER = "DELETE_USER";
+
 
 export const getUser = (uid) => {
 
@@ -83,3 +85,19 @@ export const updateBio = (userId, bio) => {
             .catch((err) => console.error(err))
     }
 }
+
+export const deleteProfil = (userId) => {
+    const token = localStorage.getItem("jwt")
+    return (dispatch) => {
+        return axios
+            ({
+                method: "delete",
+                url: `${process.env.REACT_APP_API_URL}api/users/` + userId,
+                headers: { 'Authorization': 'Bearer ' + token },
+            })
+            .then((res) => {
+                dispatch({ type: DELETE_USER, payload: userId })
+            })
+            .catch((err) => console.log(err))
+    };
+};

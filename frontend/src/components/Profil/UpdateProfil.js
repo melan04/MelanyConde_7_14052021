@@ -4,6 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import UploadImg from "./UploadImg";
 import { updateBio } from "../../actions/user.actions";
 import { dateParser } from "../Utils";
+import DeleteProfil from "./DeleteProfil";
+
+
+
+
+
+
 
 const UpdateProfil = () => {
     const [bio, setBio] = useState("");
@@ -15,6 +22,8 @@ const UpdateProfil = () => {
         dispatch(updateBio(user.id, bio));
         setUpdateForm(false);
     }
+    
+
 
 
     return (
@@ -48,6 +57,9 @@ const UpdateProfil = () => {
                                 <button onClick={handleUpdate}>Valider modifications</button>
                             </>
                         )}
+                        <br />
+                    <br />
+                    <DeleteProfil id= {user.id} />
                     </div>
                     <br />
                     <br />
