@@ -6,7 +6,7 @@ exports.findAllComments = (req, res, next) => {
   Comment.findAll({where: {articleId: req.params.id}})
   .then(comments => {
       console.log(comments);
-      res.status(200).json({data: comments});
+      res.status(200).json(comments);
   })
   .catch(error => res.status(400).json({ error }));
 };

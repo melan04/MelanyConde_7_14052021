@@ -4,9 +4,9 @@ import React from 'react';
 const Logout = () => {
 
     return (
-        <li onClick={""}>
+      
             <img src="../img/icons/logout.svg" alt="logo logout" />
-        </li>
+  
     );
 };
 
