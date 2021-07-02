@@ -30,18 +30,17 @@ export const addPost = (data) => {
 
     const token = localStorage.getItem("jwt")
 
-    return (dispatch) => {
+    return () => {
         return axios
             ({
                 method: "post",
                 url: `${process.env.REACT_APP_API_URL}api/articles`,
                 headers: { 'Authorization': 'Bearer ' + token },
-                data : {data}, 
+                data, 
             })
             .then((res) => {
                 console.log(res)
               
-                dispatch({ type: ADD_POST, payload: data })
             })
             .catch((err) => console.log(err))
     }

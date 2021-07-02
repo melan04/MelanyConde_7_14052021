@@ -8,8 +8,8 @@ import { addPost, getPosts } from '../../actions/post.actions';
 const NewPostForm = () => {
 
     const [isLoading, setIsLoading] = useState(true);
-    const [content, setContent] = useState("");
-    const [title, setTitle] = useState("");
+    const [content, setContent] = useState(" ");
+    const [title, setTitle] = useState(" ");
 
     // const [postPicture, setPostPicture] = useState(null);
     // const [video, setVideo] = useState("");
@@ -29,14 +29,12 @@ const NewPostForm = () => {
         // if (content || postPicture || video) {
         if (content || title) {
             const data = new FormData();
-
             // data.append('articleUrl', user.id);
             data.append('content', content);
             data.append('title', title);
-            data.append('userID', user.id)
+            data.append('userId', user.id)
             // if (file) data.append("file", file)
             // data.append('articleUrl', video)
-
 
             await dispatch(addPost(data));
 
@@ -46,7 +44,9 @@ const NewPostForm = () => {
         } else {
             alert("Entrez votre message")
         }
+        
     };
+    
 
     const cancelPost = () => {
         setTitle('');
