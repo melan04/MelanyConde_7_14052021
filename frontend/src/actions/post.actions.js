@@ -15,7 +15,9 @@ export const getPosts = (num) => {
             ({
                 method: "get",
                 url: `${process.env.REACT_APP_API_URL}api/articles`,
-                headers: { 'Authorization': 'Bearer ' + token },
+                headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/json',
+                'Content-Type': 'application/json' },
+                
             })
             .then((res) => {
                 const array = res.data.slice(0, num)

@@ -96,3 +96,8 @@ exports.login = (req, res, next) => {
     })
     .catch(error => res.status(500).json({ error }));
 }; 
+
+module.exports.logout = (req, res) => {
+    localStorage.clear();
+    res.redirect('/');
+  }

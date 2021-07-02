@@ -36,7 +36,7 @@ const NewPostForm = () => {
             // if (file) data.append("file", file)
             // data.append('articleUrl', video)
 
-            await dispatch(addPost(data));
+            await dispatch(addPost({ content, title, userId: user.id }));
 
             dispatch(getPosts());
             cancelPost();
@@ -44,9 +44,9 @@ const NewPostForm = () => {
         } else {
             alert("Entrez votre message")
         }
-        
+
     };
-    
+
 
     const cancelPost = () => {
         setTitle('');

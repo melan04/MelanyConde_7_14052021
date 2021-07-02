@@ -3,20 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updatePost } from '../../actions/post.actions';
 import { dateParser } from '../Utils';
 import DeleteCard from './DeleteCard';
+import CardComments from './CardComments';
 // import LikeButton from './LikeButton';
 
 const Card = ({ article }) => {
     const [isUpdated, setIsUpdated] = useState(false);
     const [textUpdate, setTextUpdate] = useState(null);
+    const [showComments, setShowComment] = useState(false);
     const users = useSelector((state) => state.usersReducer);
     const user = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
-    // const comments = useSelector((state)=> state.commentsReducer)
-
+    const comments = useSelector((state) => state.commentsReducer)
 
     const updateItem = () => {
         if (textUpdate) {
-           dispatch(updatePost(article.id, textUpdate))
+            dispatch(updatePost(article.id, textUpdate))
         }
         setIsUpdated(false);
     }
@@ -71,17 +72,18 @@ const Card = ({ article }) => {
                         <div onClick={() => setIsUpdated(!isUpdated)}>
                             <img src="./img/icons/edit.svg" alt="edit" />
                         </div>
-                        <DeleteCard id= {article.id} />
+                        <DeleteCard id={article.id} />
                     </div>
                 )}
 
                 <div className="card-footer">
                     <div className="comment-icon">
-                        <img src="./img/icons/message1.svg" alt="comment" />
-                        <span>"Ajouter les commentaires"</span>
+                        <img onClick={() => setShowComment(!showComments)} src="./img/icons/message1.svg" alt="comment" />
+                        <span>"Ajouter le nombre de commentaires"</span>
                     </div>
                     "Like à ajouter"
                 </div>
+                {showComments && <CardComments post={comments} />}
             </div>
         </li>
     );
