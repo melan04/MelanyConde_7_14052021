@@ -3,8 +3,9 @@ import axios from "axios";
 export const GET_USER = "GET_USER";
 export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
 export const UPDATE_BIO = "UPDATE_BIO";
-export const DELETE_USER = "DELETE_USER";
+export const DELETE_PROFIL = "DELETE_PROFIL";
 
+const token = localStorage.getItem("jwt")
 
 export const getUser = (uid) => {
 
@@ -87,7 +88,6 @@ export const updateBio = (userId, bio) => {
 }
 
 export const deleteProfil = (userId) => {
-    const token = localStorage.getItem("jwt")
     return (dispatch) => {
         return axios
             ({
@@ -96,7 +96,7 @@ export const deleteProfil = (userId) => {
                 headers: { 'Authorization': 'Bearer ' + token },
             })
             .then((res) => {
-                dispatch({ type: DELETE_USER, payload: userId })
+                dispatch({ type: DELETE_PROFIL, payload: {userId} })
             })
             .catch((err) => console.log(err))
     };

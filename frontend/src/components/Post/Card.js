@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updatePost } from '../../actions/post.actions';
-import { dateParser } from '../Utils';
-import DeleteCard from './DeleteCard';
-import CardComments from './CardComments';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePost } from "../../actions/post.actions";
+import { dateParser } from "../Utils";
+import DeleteCard from "./DeleteCard";
+import CardComments from "./CardComments";
 // import LikeButton from './LikeButton';
 
 const Card = ({ article }) => {
@@ -13,26 +13,31 @@ const Card = ({ article }) => {
     const users = useSelector((state) => state.usersReducer);
     const user = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
-    const comments = useSelector((state) => state.commentsReducer)
+    const comments = useSelector((state) => state.commentsReducer);
 
     const updateItem = () => {
         if (textUpdate) {
-            dispatch(updatePost(article.id, textUpdate))
+            dispatch(updatePost(article.id, textUpdate));
         }
         setIsUpdated(false);
-    }
+    };
 
     return (
         <li className="card-container" key={article.id}>
             <div className="card-left">
                 {users.map((user) => {
                     if (user.id === article.userId && user.imageUrl) {
-                        return <img src={"http://localhost:8080/images/" + user.imageUrl}
-                            alt="user" key={"id" + article.id} />
+                        return (
+                            <img
+                                src={"http://localhost:8080/images/" + user.imageUrl}
+                                alt="user"
+                                key={"id" + article.id}
+                            />
+                        );
                     } else if (user.id === article.userId && !user.imageUrl) {
-                        return null
+                        return null;
                     } else {
-                        return null
+                        return null;
                     }
                 })}
             </div>
@@ -41,9 +46,9 @@ const Card = ({ article }) => {
                     <div className="pseudo">
                         {users.map((user) => {
                             if (user.id === article.userId) {
-                                return <h3>{user.firstname}</h3>
+                                return <h3>{user.firstname}</h3>;
                             } else {
-                                return null
+                                return null;
                             }
                         })}
                     </div>
@@ -58,14 +63,14 @@ const Card = ({ article }) => {
                             onChange={(e) => setTextUpdate(e.target.value)}
                         />
                         <div className="button-container" onClick={updateItem}>
-                            <button className="btn">
-                                Valider les modifications
-                            </button>
+                            <button className="btn">Valider les modifications</button>
                         </div>
                     </div>
                 )}
-                {article.articleUrl
-                    ? <a target="_blank" rel="noopener noreferrer" className="nav-link" href={article.articleUrl} >{article.articleUrl}</a> : null}
+
+                {article.articleUrl && (
+                    <img src={article.articleUrl} alt="card-pic" className="card-pic" />
+                )}
 
                 {user.id === article.userId && (
                     <div className="button-container">
@@ -78,7 +83,11 @@ const Card = ({ article }) => {
 
                 <div className="card-footer">
                     <div className="comment-icon">
-                        <img onClick={() => setShowComment(!showComments)} src="./img/icons/message1.svg" alt="comment" />
+                        <img
+                            onClick={() => setShowComment(!showComments)}
+                            src="./img/icons/message1.svg"
+                            alt="comment"
+                        />
                         <span>"Ajouter le nombre de commentaires"</span>
                     </div>
                     "Like à ajouter"

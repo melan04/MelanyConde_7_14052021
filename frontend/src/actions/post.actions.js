@@ -74,7 +74,6 @@ export const deletePost = (articleId) => {
             })
             .then((res) => {
                 dispatch({ type: DELETE_POST, payload: {articleId} })
-                localStorage.clear();
             })
             .catch((err) => console.log(err))
     };
