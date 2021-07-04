@@ -21,8 +21,6 @@ const SignUpForm = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
 
-  const validEmailRegex = RegExp(/^(([^<>()[\].,;:s@"]+(.[^<>()[\].,;:s@"]+)*)|(".+"))@(([^<>()[\].,;:s@"]+.)+[^<>()[\].,;:s@"]{2,})$/i);
-
         if (password !== controlPassword) {
             setError("Les mots de passe ne correspondent pas");
 

@@ -4,7 +4,6 @@ const User = db.users;
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { isAbsolute } = require("path/posix");
 
 // Logiques métiers pour les utilisateurs
 // Création de nouveaux utilisateurs (Post signup)
@@ -17,8 +16,8 @@ exports.signup = (req, res, next) => {
     const isAdmin = req.body.isAdmin;
 
 
-    // const validEmailRegex = RegExp(/^(([^<>()[\].,;:s@"]+(.[^<>()[\].,;:s@"]+)*)|(".+"))@(([^<>()[\].,;:s@"]+.)+[^<>()[\].,;:s@"]{2,})$/i);
-    // const validPasswordRegex = RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i);
+    const validEmailRegex = RegExp(/^(([^<>()[\].,;:s@"]+(.[^<>()[\].,;:s@"]+)*)|(".+"))@(([^<>()[\].,;:s@"]+.)+[^<>()[\].,;:s@"]{2,})$/i);
+    const validPasswordRegex = RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i);
 
 
     // vérification que tous les champs sont remplis
@@ -27,13 +26,13 @@ exports.signup = (req, res, next) => {
         return res.status(400).json({ 'error': "Veuillez remplir l'ensemble des champs du formulaire" });
     }
 
-    // if (!validEmailRegex.test(email)) {
-    //     return res.status(400).json({ 'error': "Adresse mail non valide" });
-    // }
+    if (!validEmailRegex.test(email)) {
+        return res.status(400).json({ 'error': "Adresse mail non valide" });
+    }
 
-    // if (!validPasswordRegex.test(password)) {
-    //     return res.status(400).json({ 'error': "Le mot de passe doit contenir au moins huit caractères,une lettre et un chiffre" });
-    // }
+    if (!validPasswordRegex.test(password)) {
+        return res.status(400).json({ 'error': "Le mot de passe doit contenir au moins huit caractères,une lettre et un chiffre" });
+    }
 
     User.findOne({
         attributes: ['email'],
