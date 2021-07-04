@@ -4,6 +4,7 @@ import { updatePost } from "../../actions/post.actions";
 import { dateParser } from "../Utils";
 import DeleteCard from "./DeleteCard";
 import CardComments from "./CardComments";
+import { getComments } from "../../actions/comment.actions";
 // import LikeButton from './LikeButton';
 
 const Card = ({ article }) => {
@@ -13,7 +14,7 @@ const Card = ({ article }) => {
     const users = useSelector((state) => state.usersReducer);
     const user = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
-    const comments = useSelector((state) => state.commentsReducer);
+    const comments = useDispatch((state)=> state.commentReducer);
 
     const updateItem = () => {
         if (textUpdate) {
@@ -72,7 +73,7 @@ const Card = ({ article }) => {
                     <img src={article.articleUrl} alt="card-pic" className="card-pic" />
                 )}
 
-                {user.id === article.userId && (
+                {user.id === article.userId || user.isAdmin && (
                     <div className="button-container">
                         <div onClick={() => setIsUpdated(!isUpdated)}>
                             <img src="./img/icons/edit.svg" alt="edit" />
@@ -80,6 +81,7 @@ const Card = ({ article }) => {
                         <DeleteCard id={article.id} />
                     </div>
                 )}
+
 
                 <div className="card-footer">
                     <div className="comment-icon">
@@ -92,7 +94,7 @@ const Card = ({ article }) => {
                     </div>
                     "Like à ajouter"
                 </div>
-                {showComments && <CardComments post={comments} />}
+                {showComments && <CardComments comment={comments} />}
             </div>
         </li>
     );

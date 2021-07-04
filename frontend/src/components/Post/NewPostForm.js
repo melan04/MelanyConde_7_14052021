@@ -29,7 +29,7 @@ const NewPostForm = () => {
             if (file) data.append("file", file);
             data.append("articleUrl", articleUrl);
 
-            await dispatch(addPost({ content, articleUrl, title, userId: user.id }));
+            await dispatch(addPost({ content, articleUrl, title, file, userId: user.id }));
 
             dispatch(getPosts());
             cancelPost();

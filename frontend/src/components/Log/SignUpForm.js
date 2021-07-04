@@ -12,9 +12,16 @@ const SignUpForm = () => {
     const [controlPassword, setControlPassword] = useState("");
     const [error, setError] = useState(null);
 
+
+
+
+
+
+
     const handleRegister = async (e) => {
         e.preventDefault();
 
+  const validEmailRegex = RegExp(/^(([^<>()[\].,;:s@"]+(.[^<>()[\].,;:s@"]+)*)|(".+"))@(([^<>()[\].,;:s@"]+.)+[^<>()[\].,;:s@"]{2,})$/i);
 
         if (password !== controlPassword) {
             setError("Les mots de passe ne correspondent pas");
@@ -81,6 +88,7 @@ const SignUpForm = () => {
                         id="email"
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
+
                     />
                     <br />
                     <label htmlFor="password">Mot de passe</label>

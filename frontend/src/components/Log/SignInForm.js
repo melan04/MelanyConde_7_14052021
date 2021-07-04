@@ -22,6 +22,7 @@ const SignInForm = () => {
                 window.location = "/profil";
                 localStorage.setItem('jwt', res.data.token);
                 localStorage.setItem('userID', res.data.userId)
+
             })
             .catch((err) => {
                 console.log(err.response);

@@ -4,6 +4,7 @@ const User = db.users;
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { isAbsolute } = require("path/posix");
 
 // Logiques métiers pour les utilisateurs
 // Création de nouveaux utilisateurs (Post signup)
@@ -13,6 +14,12 @@ exports.signup = (req, res, next) => {
     const lastname = req.body.lastname;
     const email = req.body.email;
     const password = req.body.password;
+    const isAdmin = req.body.isAdmin;
+
+
+    // const validEmailRegex = RegExp(/^(([^<>()[\].,;:s@"]+(.[^<>()[\].,;:s@"]+)*)|(".+"))@(([^<>()[\].,;:s@"]+.)+[^<>()[\].,;:s@"]{2,})$/i);
+    // const validPasswordRegex = RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i);
+
 
     // vérification que tous les champs sont remplis
     if (firstname === null || firstname === '' || lastname === null || lastname === ''
@@ -20,13 +27,17 @@ exports.signup = (req, res, next) => {
         return res.status(400).json({ 'error': "Veuillez remplir l'ensemble des champs du formulaire" });
     }
 
-    // Masquage de l'adresse mail
-    let buff = new Buffer(email);
-    let emailInbase64 = buff.toString('base64');
-    // vérification si l'user existe dans DB
+    // if (!validEmailRegex.test(email)) {
+    //     return res.status(400).json({ 'error': "Adresse mail non valide" });
+    // }
+
+    // if (!validPasswordRegex.test(password)) {
+    //     return res.status(400).json({ 'error': "Le mot de passe doit contenir au moins huit caractères,une lettre et un chiffre" });
+    // }
+
     User.findOne({
         attributes: ['email'],
-        where: { email: emailInbase64 }
+        where: { email: email }
     })
         .then((userFound) => {
             // si l'utilisateur n'existe pas la DB
@@ -34,16 +45,14 @@ exports.signup = (req, res, next) => {
                 // Hash du mot de passe avec bcrypt
                 bcrypt.hash(password, 10)
                     .then(hash => {
-                        // Masquage de l'adresse mail
-                        let buff = new Buffer(email);
-                        let emailInbase64 = buff.toString('base64');
 
                         // Création du nouvel utilisateur
                         const user = new User({
                             firstname: firstname,
                             lastname: lastname,
-                            email: emailInbase64,
-                            password: hash
+                            email: email,
+                            password: hash,
+                            isAdmin : isAdmin
                         })
                         // Sauvegarde dans la base de données
                         user.save()
@@ -59,12 +68,11 @@ exports.signup = (req, res, next) => {
 
 // Création de connexion d'utilisateur enregistré (Post login)
 exports.login = (req, res, next) => {
-    // Masquage de l'adresse mail
-    let buff = new Buffer(req.body.email);
-    let emailInbase64 = buff.toString('base64');
+
+    let email = req.body.email;
 
     // Recherche d'un utilisateur dans la base de données
-    User.findOne({ where: { email: emailInbase64 } })
+    User.findOne({ where: { email: email} })
         .then(user => {
             // Si on ne trouve pas l'utilisateur
             if (!user) {

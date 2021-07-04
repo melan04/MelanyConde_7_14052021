@@ -1,39 +1,83 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addComments } from "../../actions/comment.actions";
+import { getComments } from "../../actions/comment.actions";
+import { getPosts } from "../../actions/post.actions";
+import { dateParser } from "../Utils";
 
-const CardComments = () => {
-    const [text, setText] = useState("");
+const CardComments = ({ comment }) => {
+    const [content, setContent] = useState("");
     const users = useSelector((state) => state.usersReducer);
     const user = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
-    const comments = useSelector((state) => state.commentReducer)
-    const article = useSelector((state) => state.postReducer)
+    const comments = useSelector((state) => state.commentReducer);
+    const article = useSelector((state) => state.postReducer);
 
-    const handleComment = (e) =>{
+    const handleComment = (e) => {
         e.preventDefault();
-    }
+        if (content) {
+            dispatch(addComments(article.id, user.id, content, user.firstname))
+                .then(() => dispatch(getPosts()))
+                .then(() => setContent(''));
+        }
+    };
 
     return (
-        <div className = "comments-container">
-            {comments.map((comments)=> {
+        <div className="comments-container">
+            {article.map((comment) => {
                 return (
-                    <div className="left-part">
-                    {users.map((user) => {
-                        if (user.id === comments.userId && user.imageUrl) {
-                            return <img src={"http://localhost:8080/images/" + user.imageUrl}
-                                alt="commenter-pic" key={"id" + article.id} />
-                        } else if (user.id === article.userId && !user.imageUrl) {
-                            return null
-                        } else {
-                            return null
-                        }
-                    })}
-                </div>
-                )
+                    <div className="comment-container" key={comment.id}>
+                        <div className="left-part">
+                            {users.map((user) => {
+                                if (user.id === comment.userId && user.imageUrl) {
+                                    return (
+                                        <img
+                                            src={"http://localhost:8080/images/" + user.imageUrl}
+                                            alt="user"
+                                            key={"id" + comment.id}
+                                        />
+                                    );
+                                } else if (user.id === article.userId && !user.imageUrl) {
+                                    return null;
+                                } else {
+                                    return null;
+                                }
+                            })}
+                        </div>
+                        <div className="right-part">
+                            <div className="comment-header ">
+                                <div className="pseudo">
+                                    {users.map((user) => {
+                                        if (user.id === comment.userId && user.firstname) {
+                                            return <h3>{user.firstname}</h3>;
+                                        } else {
+                                            return null;
+                                        }
+                                    })}
+                                </div>
+                                <span>{dateParser(comment.createdAt)}</span>
+                            </div>
+                            <p>{comment.content}</p>
+                        </div>
+                    </div>
+                );
             })}
 
+            {user.id && (
+                <form action="" onSubmit={handleComment} className="comment-form">
+                    <input
+                        type="text"
+                        name="text"
+                        onChange={(e) => setContent(e.target.value)}
+                        value={content}
+                        placeholder="Laisser un commentaire"
+                    />
+                    <br />
+                    <input type="submit" value="Envoyer" />
+                </form>
+            )}
         </div>
-    )
+    );
 };
 
 export default CardComments;
