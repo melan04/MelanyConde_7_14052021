@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePost } from "../../actions/post.actions";
 import { dateParser } from "../Utils";
@@ -14,7 +14,16 @@ const Card = ({ article }) => {
     const users = useSelector((state) => state.usersReducer);
     const user = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
-    const comments = useDispatch((state)=> state.commentReducer);
+
+    
+    useEffect(()=>{
+        if(showComments) {
+           
+            dispatch(getComments(article.id));
+     
+        }
+    }, [showComments, article.id, dispatch]);
+
 
     const updateItem = () => {
         if (textUpdate) {
@@ -22,6 +31,7 @@ const Card = ({ article }) => {
         }
         setIsUpdated(false);
     };
+
 
     return (
         <li className="card-container" key={article.id}>
@@ -73,7 +83,17 @@ const Card = ({ article }) => {
                     <img src={article.articleUrl} alt="card-pic" className="card-pic" />
                 )}
 
-                {user.id === article.userId || user.isAdmin && (
+                {user.isAdmin && (
+                    <div className="button-container">
+                        <div onClick={() => setIsUpdated(!isUpdated)}>
+                            <img src="./img/icons/edit.svg" alt="edit" />
+                        </div>
+                        <DeleteCard id={article.id} />
+                    </div>
+                )}
+
+                
+                {user.id === article.userId && (
                     <div className="button-container">
                         <div onClick={() => setIsUpdated(!isUpdated)}>
                             <img src="./img/icons/edit.svg" alt="edit" />
@@ -94,7 +114,8 @@ const Card = ({ article }) => {
                     </div>
                     "Like à ajouter"
                 </div>
-                {showComments && <CardComments comment={comments} />}
+                {showComments && <CardComments comments={article.comments} />}
+               
             </div>
         </li>
     );

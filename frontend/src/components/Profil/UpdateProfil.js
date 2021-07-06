@@ -53,7 +53,9 @@ const UpdateProfil = () => {
             )}
             <br />
             <br />
-            <DeleteProfil id={user.id } />
+      
+            <DeleteProfil id={user.id} />
+      
           </div>
           <br />
           <br />

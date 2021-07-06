@@ -6,7 +6,7 @@ const DeleteProfil = (props) => {
     const dispatch = useDispatch();
     const deleteUser = () => dispatch(deleteProfil(props.id))
     return (
-        <div onClick={() => {
+        <button onClick={() => {
             if (window.confirm('Voulez-vous supprimer votre profil ? ')) {
                 deleteUser();
                 localStorage.clear();
@@ -14,8 +14,10 @@ const DeleteProfil = (props) => {
             }
         }}
         >
-            <img src="./img/icons/trash.svg" alt="trash" />
-        </div>
+        
+                 Supprimer le profil
+            
+        </button>
     );
 };
 

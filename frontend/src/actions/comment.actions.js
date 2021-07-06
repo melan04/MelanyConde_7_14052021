@@ -5,18 +5,16 @@ export const ADD_COMMENTS = "ADD_COMMENTS";
 
 const token = localStorage.getItem("jwt")
 
-export const getComments = () => {
+export const getComments = (articleId) => {
     return (dispatch) => {
         return axios
         ({
             method: "get",
-            // url: `${process.env.REACT_APP_API_URL}api/articles/` + articleId + "/comments/",
-            url : "http://localhost:8080/api/comments/" ,
+            url : "http://localhost:8080/api/articles/" + articleId + "/comments/",
             headers: { 'Authorization': 'Bearer ' + token },
         })
-        .then((res) => {
-            console.log(res)
-            dispatch ({type : GET_COMMENTS, payload:res.data})
+        .then((comment) => {
+            dispatch ({type : GET_COMMENTS, payload : {articleId , comments : comment.data }})
         }) 
         .catch ((err)=> console.log(err))
     }
