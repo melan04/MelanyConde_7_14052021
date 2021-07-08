@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment, getComments } from "../../actions/comment.actions";
 import { dateParser } from "../Utils";
+import DeleteComment from "./DeleteComment";
 
 const CardComments = ({ comments, articleId, userId }) => {
     const [content, setContent] = useState("");
@@ -16,24 +17,23 @@ const CardComments = ({ comments, articleId, userId }) => {
         if (content) {
             dispatch(addComment(articleId, userId, content))
                 .then(() => dispatch(getComments()))
-                .then(() => setContent(''));
+                .then(() => setContent(""));
         }
-    }
+    };
 
     useEffect(() => {
-        if (loadComment)
-            dispatch(getComments())
-                .then(() => setLoadComment(false));
+        if (loadComment) dispatch(getComments()).then(() => setLoadComment(false));
     }, [dispatch, loadComment]);
 
     return (
         <div className="comments-container">
             {loadComment && <i className="fas fa-spinner fa-spin"></i>}
             <ul>
-                {comments && comments.length > 0 &&
+                {comments &&
+                    comments.length > 0 &&
                     comments.map((comment) => {
                         return (
-                            <div className="comment-container" >
+                            <div className="comment-container">
                                 <div className="left-part">
                                     {users.map((user) => {
                                         if (user.id === comment.userId && user.imageUrl) {
@@ -66,10 +66,23 @@ const CardComments = ({ comments, articleId, userId }) => {
                                     </div>
                                     <p>{comment.content}</p>
                                 </div>
+
+
+                                {user.id && (
+                                    <div className="button-container">
+                                        <DeleteComment id={comment.id} />
+                                    </div>
+                                )}
+                                {user.isAdmin && (
+                                    <div className="button-container">
+                                        <DeleteComment id={comment.id} />
+                                    </div>
+                                )}
+
+
                             </div>
                         );
                     })}
-
                 {user.id && (
                     <form action="" onSubmit={handleComment} className="comment-form">
                         <input
@@ -82,7 +95,8 @@ const CardComments = ({ comments, articleId, userId }) => {
                         <br />
                         <input type="submit" value="Envoyer" />
                     </form>
-                )} </ul>
+                )}{" "}
+            </ul>
         </div>
     );
 };

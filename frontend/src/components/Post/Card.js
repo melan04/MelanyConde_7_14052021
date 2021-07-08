@@ -62,13 +62,16 @@ const Card = ({ article }) => {
           <span>{dateParser(article.createdAt)}</span>
         </div>
         <p>{article.title}</p>
+        
         {isUpdated === false && <p>{article.content}</p>}
+
         {isUpdated && (
           <div className="update-post">
             <textarea
               defaultValue={article.content}
               onChange={(e) => setTextUpdate(e.target.value)}
             />
+
             <div className="button-container" onClick={updateItem}>
               <button className="btn">Valider les modifications</button>
             </div>
@@ -116,3 +119,5 @@ const Card = ({ article }) => {
 };
 
 export default Card;
+
+

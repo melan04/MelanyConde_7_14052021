@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_COMMENTS = "GET_COMMENTS";
 export const ADD_COMMENTS = "ADD_COMMENTS";
+export const DELETE_COMMENTS = "DELETE_COMMENTS";
 
 const token = localStorage.getItem("jwt")
 
@@ -38,3 +39,18 @@ export const addComment = (articleId, userId, content) => {
             .catch((err) => console.log(err))
     }
 }
+
+export const deleteComment = (commentId) => {
+    return (dispatch) => {
+        return axios
+            ({
+                method: "delete",
+                url: `${process.env.REACT_APP_API_URL}api/comments/` + commentId,
+                headers: { 'Authorization': 'Bearer ' + token },
+            })
+            .then((res) => {
+                dispatch({ type: DELETE_COMMENTS, payload: {commentId} })
+            })
+            .catch((err) => console.log(err))
+    };
+};
