@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addComments, getComments } from "../../actions/comment.actions";
-import { getPosts } from "../../actions/post.actions";
+import { addComment, getComments } from "../../actions/comment.actions";
 import { dateParser } from "../Utils";
 
-const CardComments = ({ comments }) => {
-    console.log(comments)
+const CardComments = ({ comments, articleId, userId }) => {
     const [content, setContent] = useState("");
     const [loadComment, setLoadComment] = useState(true);
     const users = useSelector((state) => state.usersReducer);
     const user = useSelector((state) => state.userReducer);
-    const article = useSelector((state) => state.postReducer);
     const dispatch = useDispatch();
 
     const handleComment = (e) => {
         e.preventDefault();
+
         if (content) {
-            dispatch(addComments(article.id, user.id, content, user.firstname))
+            dispatch(addComment(articleId, userId, content))
                 .then(() => dispatch(getComments()))
-                .then(() => setContent(""));
+                .then(() => setContent(''));
         }
-    };
+    }
 
     useEffect(() => {
         if (loadComment)
@@ -76,7 +74,7 @@ const CardComments = ({ comments }) => {
                     <form action="" onSubmit={handleComment} className="comment-form">
                         <input
                             type="text"
-                            name="text"
+                            name="content"
                             onChange={(e) => setContent(e.target.value)}
                             value={content}
                             placeholder="Laisser un commentaire"

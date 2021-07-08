@@ -14,7 +14,6 @@ const App = () => {
   const readStorage =() => {
     const user = localStorage.getItem("userID")
     if (user) {
-      console.log(user)
       setUid(user)
     }
   }

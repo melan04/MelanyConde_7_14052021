@@ -20,9 +20,8 @@ export const getPosts = (num) => {
                 
             })
             .then((res) => {
-                const array = res.data.slice(0, num)
       
-                dispatch({ type: GET_POSTS, payload: array })
+                dispatch({ type: GET_POSTS, payload: res.data})
             })
             .catch((err) => console.log(err))
     }
@@ -44,7 +43,7 @@ export const addPost = (data) => {
                 console.log(res)
               
             })
-            .catch((err) => console.log(err))
+            .catch((err) => console.log(err))  
     }
 }
 

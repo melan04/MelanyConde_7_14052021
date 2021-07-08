@@ -21,7 +21,7 @@ export const getUser = (uid) => {
             })
             .then((res) => {
 
-                console.log(res.data.id)
+             
                 dispatch({ type: GET_USER, payload: res.data });
 
             })

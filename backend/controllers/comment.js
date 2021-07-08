@@ -29,6 +29,7 @@ exports.createComment = (req, res, next) => {
   const comment = new Comment({
     ...commentObject
   });
+  console.log(comment)
   // Enregistrement de l'objet commentaire dans la base de données
   comment.save()
     .then(() => {
@@ -41,6 +42,7 @@ exports.createComment = (req, res, next) => {
     })
     .catch(error => res.status(400).json({ error }));
 }
+
 
 // Logique métier : supprimer un commentaire
 exports.deleteComment = (req, res, next) => {
