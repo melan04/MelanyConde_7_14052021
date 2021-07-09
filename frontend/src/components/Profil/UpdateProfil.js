@@ -24,10 +24,17 @@ const UpdateProfil = () => {
       <div className="update-container">
         <div className="left-part">
           <h3>Photo de profil</h3>
-          <img
-            src={"http://localhost:8080/images/" + user.imageUrl}
-            alt="userpix"
-          />
+          {user.imageUrl ?
+                            <img
+                                src={"http://localhost:8080/images/" + user.imageUrl}
+                                alt="user"
+                                key={"userImage" + user.id}
+                            /> : 
+                            <img
+                                src={"http://localhost:8080/images/undefined.jpeg"}
+                                alt="user"
+                            />
+                        }
           <UploadImg />
         </div>
         <div className="right-part">

@@ -13,11 +13,6 @@ const SignUpForm = () => {
     const [error, setError] = useState(null);
 
 
-
-
-
-
-
     const handleRegister = async (e) => {
         e.preventDefault();
 
