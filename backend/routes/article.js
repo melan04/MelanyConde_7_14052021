@@ -8,10 +8,10 @@ const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 
 // Routes
-router.get('/', auth, multer, articleCtrl.findAllArticles);
+router.get('/', auth, articleCtrl.findAllArticles);
 router.get('/:id/comments', auth, commentCtrl.findAllComments);
 router.get('/:id/likes', auth, likeCtrl.findAllLikes);
-router.get('/:id', auth, articleCtrl.findOneArticle);
+router.get('/:id', auth, multer, articleCtrl.findOneArticle);
 router.post('/', auth, multer, articleCtrl.createArticle);
 router.put('/:id', auth, articleCtrl.modifyArticle);
 router.delete('/:id', auth, articleCtrl.deleteArticle);

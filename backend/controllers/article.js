@@ -53,12 +53,22 @@ exports.createArticle = (req, res, next) => {
   if (title === null || title === '' || content === null || content === '') {
     return res.status(400).json({ 'error': "Veuillez remplir les champs 'titre' et 'contenu' pour créer un article" });
   }
-  const articleObject = req.body;
 
+ const articleObject = req.file ?
+    {
+      ...req.body.article,
+      articleUrl: req.file.filename
+    } : { ...req.body };
+
+    
   // Création d'un nouvel objet article
   const article = new Article({
     ...articleObject,
   });
+
+
+
+
   // Enregistrement de l'objet article dans la base de données
   article.save()
     .then(() => res.status(201).json({ message: 'Article créé !' }))

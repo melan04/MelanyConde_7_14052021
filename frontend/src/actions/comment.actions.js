@@ -11,7 +11,7 @@ export const getComments = (articleId) => {
         return axios
             ({
                 method: "get",
-                url: "http://localhost:8080/api/articles/" + articleId + "/comments/",
+                url: `${process.env.REACT_APP_API_URL}api/articles/` + articleId + "/comments/",
                 headers: { 'Authorization': 'Bearer ' + token },
             })
             .then((comment) => {
@@ -28,7 +28,7 @@ export const addComment = (articleId, userId, content) => {
         return axios
             ({
                 method: "post",
-                url: "http://localhost:8080/api/comments/",
+                url: `${process.env.REACT_APP_API_URL}api/comments/`,
                 headers: { 'Authorization': 'Bearer ' + token, 'Content-Type' : 'application/json'},
                 data: {userId, content,articleId},
             })

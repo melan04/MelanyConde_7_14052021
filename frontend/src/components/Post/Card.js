@@ -79,7 +79,7 @@ const Card = ({ article }) => {
         )}
 
         {article.articleUrl && (
-          <img src={article.articleUrl} alt="card-pic" className="card-pic" />
+          <img  src={"http://localhost:8080/images/" + article.articleUrl} alt="article" className="card-pic" key = {"articleImage" + user.id}/>
         )}
 
         {user.isAdmin && (

@@ -4,32 +4,26 @@ import { isEmpty, timestampParser } from "../Utils";
 import { NavLink } from "react-router-dom";
 import { addPost, getPosts } from "../../actions/post.actions";
 
-const NewPostForm = () => {
+const NewPostForm = (userId) => {
     const [isLoading, setIsLoading] = useState(true);
     const [content, setContent] = useState(" ");
     const [title, setTitle] = useState(" ");
-    const [articleUrl, setArticleUrl] = useState("");
-    const [file, setFile] = useState();
+    const [articleUrl, setArticleUrl] = useState('');
     const dispatch = useDispatch();
     const user = useSelector((state) => state.userReducer);
 
-    const handlePicture = (e) => {
-        setArticleUrl(URL.createObjectURL(e.target.files[0]));
-        setFile(e.target.files[0]);
-    };
 
-    const handlePost = async () => {
+    const handlePost = async (e) => {
+        e.preventDefault();
         if (content || articleUrl || title) {
 
             const data = new FormData();
-
             data.append("content", content);
             data.append("title", title);
             data.append("userId", user.id);
-            if (file) data.append("file", file);
-            data.append("articleUrl", articleUrl);
+            data.append("image", articleUrl);
 
-            await dispatch(addPost({ content, articleUrl, title, file, userId: user.id }));
+            await dispatch(addPost(data));
 
             dispatch(getPosts());
             cancelPost();
@@ -42,7 +36,7 @@ const NewPostForm = () => {
         setTitle("");
         setContent("");
         setArticleUrl("");
-        setFile("");
+
     };
 
     useEffect(() => {
@@ -97,9 +91,7 @@ const NewPostForm = () => {
                                 <div className="content">
                                     <p>{title}</p>
                                     <p>{content}</p>
-                                    <img
-                                        src={articleUrl}
-                                        alt="" />
+                                    <img src={articleUrl} alt="" />
                                 </div>
                             </li>
                         ) : null}
@@ -110,15 +102,15 @@ const NewPostForm = () => {
                                         <img src="./img/icons/picture.svg" alt="img" />
                                         <input
                                             type="file"
-                                            id="file-upload"
+                                            id="file"
                                             name="file"
-                                            accept=".jpg, .jpeg .png"
-                                            onChange={(e) => handlePicture(e)}
+                                            accept=".jpg, .jpeg, .png"
+                                            onChange={(e) => setArticleUrl(e.target.files[0])}
                                         />
                                     </>
                                 )}
                                 {articleUrl && (
-                                    <button onClick={() => setArticleUrl("")}> Supprimer image</button>
+                                    <button onClick={() => setArticleUrl("")}> Supprimer photo</button>
                                 )}
                             </div>
                             <div className="btn-send">

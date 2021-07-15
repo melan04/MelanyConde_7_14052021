@@ -92,7 +92,7 @@ exports.login = (req, res, next) => {
                                 userId: user.id,
                                 isAdmin: user.isAdmin
                             },
-                            'bWFzdXBlcmNsZXNlY3JldGVwb3VydG9rZW5tYWdpcXVlcXVlcGVyc29ubmVpbHBldXRsYWRldmluZXI=',
+                            process.env.JWT_RAND_SECRET,
                             { expiresIn: '1h' }
 
                         )

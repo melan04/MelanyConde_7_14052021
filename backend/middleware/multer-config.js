@@ -13,6 +13,7 @@ const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, 'images')
     },
+    
     // Génération du nom du fichier : nom d'origine + numero unique + . + extension
     filename: (req, file, callback) => {
         const brut = file.originalname;

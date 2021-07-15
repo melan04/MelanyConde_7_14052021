@@ -27,21 +27,21 @@ export const getPosts = (num) => {
     }
 }
 
-export const addPost = (data) => {
+export const addPost = (data, userId) => {
 
     const token = localStorage.getItem("jwt")
 
-    return () => {
+    return (dispatch) => {
         return axios
             ({
                 method: "post",
                 url: `${process.env.REACT_APP_API_URL}api/articles`,
-                headers: { 'Authorization': 'Bearer ' + token },
-                data, 
+                headers: { 'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'},
+                data,
             })
             .then((res) => {
-                console.log(res)
-              
+                dispatch({ type: ADD_POST, payload: res.data, userId });
             })
             .catch((err) => console.log(err))  
     }
