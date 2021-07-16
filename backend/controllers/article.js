@@ -56,11 +56,11 @@ exports.createArticle = (req, res, next) => {
 
  const articleObject = req.file ?
     {
-      ...req.body.article,
+      ...req.body,
       articleUrl: req.file.filename
     } : { ...req.body };
 
-    
+
   // Création d'un nouvel objet article
   const article = new Article({
     ...articleObject,

@@ -62,7 +62,7 @@ const Card = ({ article }) => {
           <span>{dateParser(article.createdAt)}</span>
         </div>
         <p>{article.title}</p>
-        
+
         {isUpdated === false && <p>{article.content}</p>}
 
         {isUpdated && (
@@ -79,7 +79,7 @@ const Card = ({ article }) => {
         )}
 
         {article.articleUrl && (
-          <img  src={"http://localhost:8080/images/" + article.articleUrl} alt="article" className="card-pic" key = {"articleImage" + user.id}/>
+          <img src={"http://localhost:8080/images/" + article.articleUrl} alt="article" className="card-pic" key={"articleImage" + user.id} />
         )}
 
         {user.isAdmin && (
@@ -108,11 +108,12 @@ const Card = ({ article }) => {
               alt="comment"
             />
 
-            <span>{article.comments && article.comments.length}</span>
+
+            <span>Ecrire un commentaire </span>
           </div>
         </div>
 
-        {showComments && <CardComments comments={article.comments} articleId = {article.id} userId = {user.id} />}
+        {showComments && <CardComments comments={article.comments} articleId={article.id} userId={user.id} />}
       </div>
     </li>
   );

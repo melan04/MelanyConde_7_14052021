@@ -91,7 +91,6 @@ const NewPostForm = (userId) => {
                                 <div className="content">
                                     <p>{title}</p>
                                     <p>{content}</p>
-                                    <img src={articleUrl} alt="" />
                                 </div>
                             </li>
                         ) : null}
