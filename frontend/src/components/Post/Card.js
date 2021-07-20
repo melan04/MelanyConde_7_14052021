@@ -6,8 +6,6 @@ import DeleteCard from "./DeleteCard";
 import CardComments from "./CardComments";
 import { getComments } from "../../actions/comment.actions";
 
-// import LikeButton from './LikeButton';
-
 const Card = ({ article }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);

@@ -36,7 +36,6 @@ db.Sequelize = Sequelize;
 
 db.users = require('./user')(sequelize, Sequelize);
 db.articles = require('./article')(sequelize, Sequelize);
-db.likes = require('./like')(sequelize, Sequelize);
 db.comments = require('./comment')(sequelize, Sequelize);
 
 module.exports = db;

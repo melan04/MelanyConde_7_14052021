@@ -11,7 +11,6 @@ const rateLimit = require('express-rate-limit');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const articleRoutes = require('./routes/article')
-const likeRoutes = require('./routes/like');
 const commentRoutes = require('./routes/comment');
 
 // lancement de l'application express
@@ -55,7 +54,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', authRoutes);
 app.use('/api/users', auth, userRoutes);
 app.use('/api/articles', auth, articleRoutes);
-app.use('/api/likes', auth, likeRoutes);
 app.use('/api/comments', auth, commentRoutes);
 
 // export de notre app

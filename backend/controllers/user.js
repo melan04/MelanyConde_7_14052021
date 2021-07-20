@@ -3,7 +3,6 @@ const models = require("../models");
 const User = models.users;
 const Article = models.articles;
 const Comment = models.comments;
-const Like = models.likes;
 
 const fs = require('fs');
 
@@ -61,8 +60,6 @@ exports.modifyUser = (req, res, next) => {
 
 // logique métier : supprimer un utilisateur
 exports.deleteUser = (req, res, next) => {
-  Like.destroy({ where: { userId: req.params.id } })
-    .then(() =>
       Comment.destroy({ where: { userId: req.params.id } })
         .then(() =>
           Article.findAll({ where: { userId: req.params.id } })
@@ -71,7 +68,6 @@ exports.deleteUser = (req, res, next) => {
                 articles.forEach(
                   (article) => {
                     Comment.destroy({ where: { articleId: article.id } })
-                    Like.destroy({ where: { articleId: article.id } })
                     Article.destroy({ where: { id: article.id } })
                   }
                 )
@@ -88,6 +84,6 @@ exports.deleteUser = (req, res, next) => {
                 })
             )
         )
-    )
+    
     .catch(error => res.status(400).json({ error }));
 };
