@@ -103,7 +103,7 @@ const NewPostForm = (userId) => {
                                             type="file"
                                             id="file"
                                             name="file"
-                                            accept=".jpg, .jpeg, .png"
+                                            accept=".jpg, .jpeg, .png .gifs"
                                             onChange={(e) => setArticleUrl(e.target.files[0])}
                                         />
                                     </>

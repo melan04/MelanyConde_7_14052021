@@ -40,7 +40,7 @@ export const addComment = (articleId, userId, content) => {
     }
 }
 
-export const deleteComment = (commentId) => {
+export const deleteComment = (commentId, articleId) => {
     return (dispatch) => {
         return axios
             ({
@@ -49,7 +49,7 @@ export const deleteComment = (commentId) => {
                 headers: { 'Authorization': 'Bearer ' + token },
             })
             .then((res) => {
-                dispatch({ type: DELETE_COMMENTS, payload: {commentId} })
+                dispatch({ type: DELETE_COMMENTS, payload: {commentId, articleId} })
             })
             .catch((err) => console.log(err))
     };

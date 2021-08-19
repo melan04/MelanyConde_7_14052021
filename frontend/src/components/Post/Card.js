@@ -77,19 +77,15 @@ const Card = ({ article }) => {
         )}
 
         {article.articleUrl && (
-          <img src={"http://localhost:8080/images/" + article.articleUrl} alt="article" className="card-pic" key={"articleImage" + user.id} />
+          <img
+            src={"http://localhost:8080/images/" + article.articleUrl}
+            alt="article"
+            className="card-pic"
+            key={"articleImage" + user.id}
+          />
         )}
 
-        {user.isAdmin && (
-          <div className="button-container">
-            <div onClick={() => setIsUpdated(!isUpdated)}>
-              <img src="./img/icons/edit.svg" alt="edit" />
-            </div>
-            <DeleteCard id={article.id} />
-          </div>
-        )}
-
-        {user.id === article.userId && (
+        {(user.isAdmin || (user.id === article.userId)) && (
           <div className="button-container">
             <div onClick={() => setIsUpdated(!isUpdated)}>
               <img src="./img/icons/edit.svg" alt="edit" />
@@ -106,17 +102,20 @@ const Card = ({ article }) => {
               alt="comment"
             />
 
-
-            <span>Ecrire un commentaire </span>
+            <span> Ecrire un commentaire </span>
           </div>
         </div>
 
-        {showComments && <CardComments comments={article.comments} articleId={article.id} userId={user.id} />}
+        {showComments && (
+          <CardComments
+            comments={article.comments}
+            articleId={article.id}
+            userId={user.id}
+          />
+        )}
       </div>
     </li>
   );
 };
 
 export default Card;
-
-

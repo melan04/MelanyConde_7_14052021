@@ -194,10 +194,15 @@
         }
       }
       .comment-icon,
-      span {
-        font-size: 0.7rem;
-        position: absolute;
-        transform: translate(29px, 2px);
+      .like-container {
+        display: flex;
+        align-items: center;
+
+        span {
+          font-size: 0.7rem;
+          position: absolute;
+          transform: translate(29px, 2px);
+        }
       }
     }
     .comment-container.client {
@@ -373,6 +378,7 @@
         }
       }
     }
+
   }
   .update-post {
     textarea {

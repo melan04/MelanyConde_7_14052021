@@ -13,7 +13,7 @@ exports.signup = (req, res, next) => {
     const lastname = req.body.lastname;
     const email = req.body.email;
     const password = req.body.password;
-    const isAdmin = req.body.isAdmin;
+    const is  = req.body.isAdmin;
 
 
     const validEmailRegex = RegExp(/^([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})/i);

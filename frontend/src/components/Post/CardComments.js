@@ -25,6 +25,8 @@ const CardComments = ({ comments, articleId, userId }) => {
         if (loadComment) dispatch(getComments()).then(() => setLoadComment(false));
     }, [dispatch, loadComment]);
 
+    console.log(user.isAdmin)
+
     return (
         <div className="comments-container">
             {loadComment && <i className="fas fa-spinner fa-spin"></i>}
@@ -68,16 +70,12 @@ const CardComments = ({ comments, articleId, userId }) => {
                                 </div>
 
 
-                                {user.id && (
+                                {(user.isAdmin || (user.id === comment.userId)) && (
                                     <div className="button-container">
-                                        <DeleteComment id={comment.id} />
+                                        <DeleteComment id={comment.id} articleId={articleId} />
                                     </div>
                                 )}
-                                {user.isAdmin && (
-                                    <div className="button-container">
-                                        <DeleteComment id={comment.id} />
-                                    </div>
-                                )}
+
 
 
                             </div>
