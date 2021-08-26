@@ -51,7 +51,6 @@ exports.signup = (req, res, next) => {
                             lastname: lastname,
                             email: email,
                             password: hash,
-                            isAdmin: isAdmin,
                         })
                         // Sauvegarde dans la base de données
                         user.save()
