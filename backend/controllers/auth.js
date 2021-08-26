@@ -13,7 +13,7 @@ exports.signup = (req, res, next) => {
     const lastname = req.body.lastname;
     const email = req.body.email;
     const password = req.body.password;
-    const is  = req.body.isAdmin;
+    const is = req.body.isAdmin;
 
 
     const validEmailRegex = RegExp(/^([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})/i);
@@ -51,7 +51,7 @@ exports.signup = (req, res, next) => {
                             lastname: lastname,
                             email: email,
                             password: hash,
-                            isAdmin : isAdmin
+                            isAdmin: isAdmin,
                         })
                         // Sauvegarde dans la base de données
                         user.save()
@@ -71,7 +71,7 @@ exports.login = (req, res, next) => {
     let email = req.body.email;
 
     // Recherche d'un utilisateur dans la base de données
-    User.findOne({ where: { email: email} })
+    User.findOne({ where: { email: email } })
         .then(user => {
             // Si on ne trouve pas l'utilisateur
             if (!user) {
